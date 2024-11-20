@@ -24,4 +24,4 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/fabiancdng/fabiancdng-homepage:latest
+            ghcr.io/genissia/image-name:latest
