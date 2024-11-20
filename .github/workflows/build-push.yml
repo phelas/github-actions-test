@@ -9,6 +9,8 @@ on:
 jobs:
   Deploy:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v1
@@ -24,4 +26,4 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/genissia/image-name:latest
+            ghcr.io/${{ github.repository }}:${{ github.sha }}
