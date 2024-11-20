@@ -12,6 +12,14 @@ jobs:
     permissions:
       packages: write
     steps:
+      -
+        name: Determine tags
+        id: get_tags
+        run: |
+          echo "DEV_TAG=main-latest" >> $GITHUB_ENV
+          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
+          echo "COMMIT_SHA=${SHORT_SHA}" >> $GITHUB_ENV
+
       - name: Checkout Code
         uses: actions/checkout@v1
       - name: Login to GitHub Container Registry
@@ -27,4 +35,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:${{ github.sha }}:${{ env.VERSION }}
+            ghcr.io/${{ github.repository }}:${{ env.DEV_TAG }}
